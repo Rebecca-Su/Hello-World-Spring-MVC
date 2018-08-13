@@ -18,7 +18,7 @@ import com.entity.User;
 @RequestMapping(value = "/hello")
 public class HelloWorldController{
 	@Resource
-	private UserMapper userMapper;
+	private UserService userService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String sayHello(Model model) {
@@ -27,7 +27,7 @@ public class HelloWorldController{
 	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
 	public ModelAndView getDetail(@PathVariable(value="name")String name) {
 		ModelAndView m = new ModelAndView();
-        User a = userMapper.selectByE(name);
+        User a = userService.selectByE(name);
 		m.addObject("name", a);  
 		m.setViewName("hello-name");
 		return m;
@@ -36,7 +36,7 @@ public class HelloWorldController{
 	@ResponseBody
 	@RequestMapping(value = "/json/{name}", method = RequestMethod.GET)
 	public User getJsonDetail(@PathVariable(value="name")String name) {
-		 User a = userMapper.selectByE(name);
+		 User a = userService.selectByE(name);
 		return a;
 	}
 }
