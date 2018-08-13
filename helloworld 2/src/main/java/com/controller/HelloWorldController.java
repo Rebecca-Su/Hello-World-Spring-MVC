@@ -33,5 +33,10 @@ public class HelloWorldController{
 		return m;
 
 	}
-	
+	@ResponseBody
+	@RequestMapping(value = "/json/{name}", method = RequestMethod.GET)
+	public User getJsonDetail(@PathVariable(value="name")String name) {
+		 User a = userMapper.selectByE(name);
+		return a;
+	}
 }
